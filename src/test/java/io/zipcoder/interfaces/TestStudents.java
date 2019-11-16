@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class StudentsTest {
+public class TestStudents {
 
     @Before
     public void setUp() throws Exception {

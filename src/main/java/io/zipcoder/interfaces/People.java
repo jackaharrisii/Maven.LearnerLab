@@ -42,10 +42,11 @@ public class People implements Iterable<Person>{
         return personList.size();
     }
 
-    public String[] toArray(){
-        String[] personArray = new String[personList.size()];
+    public Person[] toArray(){
+        Person[] personArray = new Person[personList.size()];
         for (int i = 0; i < personList.size(); i++){
-            personArray[i] = String.format("ID: %l, Name: %s", personList.get(i).getId(), personList.get(i).getName());
+//            personArray[i] = String.format("ID: %l, Name: %s", personList.get(i).getId(), personList.get(i).getName());
+            personArray[i] = personList.get(i);
         }
         return personArray;
     }

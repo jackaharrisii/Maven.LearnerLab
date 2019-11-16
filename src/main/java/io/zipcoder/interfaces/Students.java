@@ -2,7 +2,7 @@ package io.zipcoder.interfaces;
 
 import org.omg.PortableInterceptor.INACTIVE;
 
-public final class Students extends People {
+public final class Students extends People<Student> {
 
     private static final Students INSTANCE = new Students();
 
@@ -77,6 +77,15 @@ public final class Students extends People {
         super.add(haynes);
         Student jones = new Student(35, "Wesley Jones");
         super.add(jones);
+    }
+
+    public Student[] getArray() {
+        Student[] studentArray = new Student[INSTANCE.count()];
+        int i = 0;
+        for (Student student : INSTANCE){
+            studentArray[i++] = student;
+        }
+        return studentArray;
     }
 
     public static Students getInstance(){

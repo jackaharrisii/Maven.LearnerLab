@@ -4,55 +4,65 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class People implements Iterable<Person>{
+public abstract class People<E extends Person> implements Iterable<E>{
 
-    List<Person> personList = new ArrayList<Person>();
+    private ArrayList<E> personList;
 
-    public void add(Person person){
-        this.personList.add(person);
+    public People(ArrayList<E> personList){
+        this.personList = personList;
     }
 
-    public Person findById (long id){
-        for(Person person : personList){
-            if (person.getId() == id){
-                return person;
+    public People() {
+        this.personList = new ArrayList<E>();
+    }
+
+    public void add(E e){
+        this.personList.add(e);
+    }
+
+    public E findById (long id){
+        for(E e : this.personList){
+            if (e.getId() == id){
+                return e;
             }
         }
         return null;
     }
 
-    public Boolean contains (Person personToFind){
-        return this.personList.contains(personToFind);
+    public Boolean contains (E e){
+        return this.personList.contains(e);
     }
 
-    public void remove (Person personToRemove){
-        personList.remove(personToRemove);
+    public void remove (E e){
+        personList.remove(e);
     }
 
     public void remove (long id){
-        Person personToRemove = findById(id);
-        remove(personToRemove);
+        E e = findById(id);
+        if (e != null) {
+            remove(e);
+        }
     }
 
     public void removeAll (){
-        personList.clear();
+        this.personList.clear();
     }
 
     public Integer count(){
-        return personList.size();
+        return this.personList.size();
     }
 
-    public Person[] toArray(){
-        Person[] personArray = new Person[personList.size()];
-        for (int i = 0; i < personList.size(); i++){
-//            personArray[i] = String.format("ID: %l, Name: %s", personList.get(i).getId(), personList.get(i).getName());
-            personArray[i] = personList.get(i);
-        }
-        return personArray;
-    }
+    public abstract E[] getArray();
+//        E[] personArray = new E[personList.size()];
+//        for (int i = 0; i < personList.size(); i++){
+////            personArray[i] = String.format("ID: %l, Name: %s", personList.get(i).getId(), personList.get(i).getName());
+//            personArray[i] = personList.get(i);
+//        }
+//        return personArray;
+
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<E> iterator() {
         return this.personList.iterator();
     }
 }

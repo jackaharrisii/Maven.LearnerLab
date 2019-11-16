@@ -21,6 +21,9 @@ public class TestZipCodeWilmington {
 
     @After
     public void tearDown() throws Exception {
+        for (Student student : students){
+            student.forget();
+        }
     }
 
     @Test
@@ -36,6 +39,18 @@ public class TestZipCodeWilmington {
     @Test
     public void testHostLectureByID() {
         zcw.hostLecture(45, 70f);
+        Assert.assertEquals(2, ((Learner)students.findById(1)).getTotalStudyTime(), 0.001);
+    }
+
+    @Test
+    public void testHostLectureByENUM(){
+        zcw.hostLecture(Educator.YOUNGER,70f);
+        Assert.assertEquals(2, ((Learner)students.findById(1)).getTotalStudyTime(), 0.001);
+    }
+
+    @Test
+    public void testHostLectureByENUM2(){
+        zcw.hostLecture(Educator.YOUNGER.getID(),70f);
         Assert.assertEquals(2, ((Learner)students.findById(1)).getTotalStudyTime(), 0.001);
     }
 

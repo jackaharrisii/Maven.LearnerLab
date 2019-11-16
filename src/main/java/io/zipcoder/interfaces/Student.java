@@ -16,4 +16,8 @@ public class Student extends Person implements Learner{
         return totalStudyTime;
     }
 
+    public void forget(){
+        totalStudyTime = 0;
+    }
+
 }
